@@ -10195,15 +10195,15 @@ function verifyNumber(text) {
     var response = prompt('Are you sure? Typing "YES!" will open a new tab with the original code generator. Anything else will cancel.');
     
     if (response == "YES!") {
-      open("https://studio.code.org/projects/applab/0y1a3zug_Z4Lg-0dbtzGVHVv29wTA0QDzPYZ7hj_oLE?qr=true");
+      open("https://studio.code.org/projects/applab/0y1a3zug_Z4Lg-0dbtzGVHVv29wTA0QDzPYZ7hj_oLE?qr");
     }
   });
   
-   onEvent("Github", "click", function() {
-    var response = prompt('Are you sure? Typing "YES!" will open a new tab with the github page. Anything else will cancel.');
+   onEvent("CodeOrg", "click", function() {
+    var response = prompt('Are you sure? Typing "YES!" will open a new tab with the code.org page. Anything else will cancel.');
     
     if (response == "YES!") {
-      open("");
+      open("https://studio.code.org/projects/applab/OiYfgYMQ52kT9xk2LhnrGab-iaHjaG1y2ceTXa9x4zg");
     }
   });
   
