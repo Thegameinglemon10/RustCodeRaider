@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css">
+	<link id = 'favicon' rel="shortcut icon" href="Blank.png" type="image">
+	<title>Seperator</title>
+  </head>
+  <body>
+	<div id="container">
+	  <div class="col">
+		<input type="url" id="ImageURL" placeholder="Image URL" oninput="resizeImageInput()">
+		<button id="FavClear">Clear</button>
+	  </div>
+	  <div class="col">
+		<input type="text" id="PageTitle" placeholder="Title">
+		<button id="PageClear">Clear title</button>
+	  </div>
+	</div>
+
+	<br>
+
+	<div id="SubContainer">
+		<h3> 
+			This is a custom version of the Vivaldi tab group seperator made by DavidBevi. This took WAY too long. I may add colors in the future.
+		</h3>
+
+		<button id="pageButton" onclick="document.location='https://github.com/DavidBevi/separator/'">Original Github Project</button>
+		<button id="pageButton" onclick="document.location='/'">Return To Home Page</button>
+	</div>
+	
+    <script>
+		//~~ Text Width Fetcher ~~\\
+		function getCssStyle(element, prop) {
+			return window.getComputedStyle(element, null).getPropertyValue(prop);
+		}
+
+		function getCanvasFont(element) {
+			const fontWeight = getCssStyle(element, 'font-weight') || 'normal';
+			const fontSize = getCssStyle(element, 'font-size') || '16px';
+			const fontFamily = getCssStyle(element, 'font-family') || 'Times New Roman';
+
+			return `${fontWeight} ${fontSize} ${fontFamily}`;
+		}
+		
+		function getTextWidth(text, font, minimumSize) {
+			const canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
+			const context = canvas.getContext("2d");
+			context.font = font;
+			
+			const metrics = context.measureText(text);
+			return Math.max(metrics.width, (minimumSize || 0));
+		}
+
+		//~~ Constants ~~\\
+		const imageInput = document.getElementById('ImageURL')
+		const titleInput = document.getElementById('PageTitle')
+		const imageClearButton = document.getElementById('FavClear')
+		const titleClearButton = document.getElementById('PageClear')
+		const faviconLink = document.head.getElementsByTagName('link')[1];
+		const urlParams = new URLSearchParams(window.location.search);
+		
+		const blankImage = "Blank.png";
+		const imageInputStyle = imageInput.style;
+		const imageInputFont = getCanvasFont(imageInput);
+		const imageInputMinSize = 300
+		
+		//~~ Utility Functions ~~\\
+		function resizeImageInput() {
+			var imageURL = imageInput.value;
+			var imageURLWidth = getTextWidth(imageURL, imageInputFont, imageInputMinSize)
+
+			imageInputStyle.width = (imageURLWidth + "px")
+		}
+
+		function validateURL(imageURL) {
+			if (imageURL == '') {
+				return new Promise((resolve) => {
+					resolve(true);
+				});
+
+			} else {
+				const image = new Image();
+				image.src = imageURL;
+				
+				return new Promise((resolve) => {
+					image.onload = () => resolve(true);
+					image.onerror = () => resolve(false);
+				});
+			};
+		};
+		
+		//~~ Value Setters ~~\\
+		function setFavicon(inputImage) {
+			var imageURL = (inputImage || urlParams.get('url'));
+			if (!imageURL) {return};
+
+			validateURL((imageURL || '')).then(async function(imageIsValid) {
+				if (!imageIsValid) {return};
+				
+				imageInput.value = imageURL;
+				faviconLink.href = ((imageURL == '') ? blankImage : imageURL);
+				
+				resizeImageInput();
+			});
+		};
+		
+		function setPageTitle() {
+			var pageTitle = urlParams.get('title');
+			if (!pageTitle) {return};
+			
+			titleInput.value = pageTitle;
+			document.title = pageTitle;
+		}
+		
+		//~~ Input Listeners ~~\\
+		function replaceHistory() {
+			history.replaceState(null, '', window.location.pathname + '?' + urlParams.toString());
+		}
+
+		imageInput.addEventListener('input', function() {
+			var imageURL = imageInput.value
+			setFavicon(imageURL);
+			
+			urlParams.set('url', imageURL);
+			replaceHistory();
+		});
+
+		titleInput.addEventListener('input', function() {
+			var pageTitle = titleInput.value.trim();
+			if (pageTitle === '') {pageTitle = '\u200E'};
+
+			document.title = pageTitle;
+			urlParams.set('title', pageTitle);
+			replaceHistory();
+		});
+
+		//~~ Clear Button Listeners ~~\\
+		imageClearButton.addEventListener('click', function() {
+			urlParams.delete('url');
+			setFavicon('');
+			replaceHistory();
+		});
+
+		titleClearButton.addEventListener('click', function() {
+			titleInput.value = '';
+			document.title = '\u200E';
+			urlParams.set('title', '');
+			replaceHistory();
+		});
+		
+		//~~ Set Previous Values ~~\\
+		setFavicon();
+		setPageTitle();
+	</script>
+  </body>
+</html>

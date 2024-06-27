@@ -1,0 +1,55 @@
+*:not(a) {
+	color: white;
+}
+
+* {
+	background-color: #202020;
+	font-family: Arial, sans-serif;
+}
+
+#container {
+	width: fit-content;
+	margin: 0 auto;
+	padding: 8pt;
+	display: flex;
+	justify-content: center;
+	border: 2pt solid #444444;
+	border-radius: 12pt;
+}
+
+.col {
+	margin: 0pt 2pt;
+	display: flex;
+	flex-direction: column;
+}
+
+#FavClear, #PageClear {
+	color: #888888;
+	cursor: pointer;
+	border: 0pt;
+	text-align: left;
+}
+
+#ImageURL {
+	width: fit-content
+}
+
+#PageTitle, #ImageURL {
+	font-size: 18pt;
+	border: 0;
+	height: 25pt;
+	padding: 0pt 4pt;
+	outline: none;
+}
+
+#SubContainer {
+	text-align: center;
+}
+
+#pageButton {
+	padding: 0pt 10pt;
+	border-radius: 4pt;
+	height: 25pt;
+	width: 150pt;
+	background-color: #888888;
+}

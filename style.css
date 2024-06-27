@@ -1,0 +1,33 @@
+* {
+    color: white;
+	background-color: #202020;
+	font-family: Arial, sans-serif;
+}
+
+#container {
+	width: fit-content;
+	margin: 0 auto;
+	padding: 8pt;
+	display: flex;
+	justify-content: center;
+	border: 2pt solid #444444;
+	border-radius: 12pt;
+}
+
+#SubContainer {
+	text-align: center;
+}
+
+.col {
+	margin: 0pt 2pt;
+	display: flex;
+	flex-direction: column;
+}
+
+#pageButton {
+	padding: 0pt 10pt;
+	border-radius: 4pt;
+	height: 25pt;
+	width: 150pt;
+	background-color: #888888;
+}
