@@ -2,18 +2,77 @@
 <html>
   <head>
     <link rel="stylesheet" href="style.css">
-	<link id = 'favicon' rel="shortcut icon" href="PNLogo.png" type="image">
-	<title>Paradox Networks</title>
+	  <link id = 'favicon' rel="shortcut icon" href="Favicon.png" type="image">
+	  <title>Paradox Networks</title>
   </head>
   <body>
-	<div id="SubContainer">
+  
+  <div id = "scrollBar" class="row">
+    <div id="thumbTopContainer" class="row content">
+      <img id="scrollThumbTop" src="MagnetRed.png">
+    </div>
+    <img id="scrollThumbBottom" class = "row footer" src="MagnetBlue.png">
+  </div>
+
+  <div id="container">
+    <div id="subContainer">
+        <header>
+          <img id="mainLogo" src="PNLogo.png"></img>
+          <div id="headerContainer">
+            <h1 id="headerText"> 
+                Polarity Networks
+
+                <br>
+
+                "Magnetic by Design, Visionary by nature"
+            </h1>
+          </div>
+        </header>
+        
         <h3> 
-            I guess I'm a web developer now... 💀
-            I'll make this look better in the future. For now, check out my projects below:
+          This website is a work in progress!
         </h3>
 
-        <button id="pageButton" onclick="document.location='/CodeRaider'">Rust Code Raider</button>
-        <button id="pageButton" onclick="document.location='/Seperator'">Vivaldi Tab Stack Seperator</button>
+        <br>
+
+        <button id="pageButton" onclick="document.location='CodeRaider'">Rust Code Raider</button>
+        <button id="pageButton" onclick="document.location='Seperator'">Vivaldi Tab Stack Seperator</button>
     </div>
+  </div>
   </body>
+
+  <script>
+    const body = document.body;
+    const rootElem = document.documentElement;
+
+    function getMaxScrollY() {
+      const scrollHeight = rootElem.scrollHeight;
+      const windowHeight = window.innerHeight;
+
+      return (scrollHeight - windowHeight);
+    };
+
+    function moveScrollBar(scrollY) {
+      var scrollBar = document.getElementById('scrollBar');
+      var scrollBarStyle = scrollBar.style
+      var maxScrollY =  getMaxScrollY();
+      var canScroll = (maxScrollY > 0);
+
+      scrollBarStyle.setProperty("visibility", (canScroll ? "visible" : "hidden"));
+      if (!canScroll) {return};
+      
+      var thumbTop = document.getElementById('scrollThumbTop');
+      var thumbTopSyle = thumbTop.style
+      var thumbTopHeight = scrollThumbTop.height;
+
+      var scrollPercentage = ((scrollY / getMaxScrollY()) * 100);
+      var percentageModifier = 0;
+      if (scrollPercentage >= 50) {percentageModifier = thumbTopHeight};
+
+      thumbTopSyle.setProperty('top', `calc(${scrollPercentage}% - ${percentageModifier}px`);
+    };
+
+    moveScrollBar(body.scrollHeight);
+    window.addEventListener("scroll", (event) => {moveScrollBar(this.scrollY)});
+  </script>
 </html>
