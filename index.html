@@ -1,26 +1,21 @@
 <!DOCTYPE html>
 <html>
+  <!-- Meta Data -->
   <head>
     <link rel="stylesheet" href="style.css">
-	  <link id = 'favicon' rel="shortcut icon" href="Favicon.png" type="image">
+	  <link id = 'favicon' rel="shortcut icon" href="Assets/Images/Favicon.png" type="image">
 	  <title>Paradox Networks</title>
   </head>
+ 
   <body>
-  
-  <div id = "scrollBar" class="row">
-    <div id="thumbTopContainer" class="row content">
-      <img id="scrollThumbTop" src="MagnetRed.png">
-    </div>
-    <img id="scrollThumbBottom" class = "row footer" src="MagnetBlue.png">
-  </div>
-
-  <div id="container">
-    <div id="subContainer">
+    <div id="container">
+      <div id="subContainer">
+        <!-- Header -->
         <header>
-          <img id="mainLogo" src="PNLogo.png"></img>
+          <img id="mainLogo" src="Assets/Images/PNLogo.png"></img>
           <div id="headerContainer">
             <h1 id="headerText"> 
-                Polarity Networks
+                Polarity Networks (WIP)
 
                 <br>
 
@@ -28,51 +23,56 @@
             </h1>
           </div>
         </header>
+
+        <hr></hr><br>
         
-        <h3> 
-          This website is a work in progress!
-        </h3>
+        <!-- Team -->
+        <h3> Meet The Team: </h3>
 
-        <br>
+        <div id=headerContainer>
+          <img id="square" width="152.25px" src="Assets/Images/LemonHS.png"></img>
+          <div>
+            <h2 id="subText"> Thegaminglemon10 (JestaLemon) </h2>
+            <h5 id="subText"> 
+              Hey there! I'm the founder of Polarity Networks. <br>
+              My specialty is programming, though I have knowledge in many fields. <br>
+              I intend to bring quality to Roblox. Not just in gameplay, but in business practices too. <br>
+              It's tiring to see cash grabs constantly make it to the front page. Preying on children and their parent's wallets.
+            </h5>
+          </div>
+        </div>
+        
+        <br><br><hr></hr><br>
 
-        <button id="pageButton" onclick="document.location='CodeRaider'">Rust Code Raider</button>
-        <button id="pageButton" onclick="document.location='Seperator'">Vivaldi Tab Stack Seperator</button>
+        <!-- Portfolio -->
+        <h3> JestaLemon's Portfolio: </h3>
+        <div id="headerContainer"> <h5 id="subText">All of these videos are outdated by some amount, but still demonstrate the type of work I do.</h5> </div>
+
+        <div>
+          <iframe id="video" title="vimeo-player" src="https://player.vimeo.com/video/854193463?h=f77e9a8fc1" frameborder="0" allowfullscreen></iframe>
+          <iframe id="video" title="vimeo-player" src="https://player.vimeo.com/video/862560026?h=0f42fde60f" frameborder="0" allowfullscreen></iframe>
+          <iframe id="video" title="vimeo-player" src="https://player.vimeo.com/video/864253801?h=bb9c12aca4" frameborder="0" allowfullscreen></iframe>
+          <iframe id="video" title="vimeo-player" src="https://player.vimeo.com/video/870509314?h=60d3aa63be" frameborder="0" allowfullscreen></iframe>
+          <iframe id="video" title="vimeo-player" src="https://player.vimeo.com/video/915415351?h=43048a0acc" frameborder="0" allowfullscreen></iframe>
+          <iframe id="video" title="vimeo-player" src="https://player.vimeo.com/video/915417329?h=70b805f423" frameborder="0" allowfullscreen></iframe>
+          <iframe id="video" title="vimeo-player" src="https://player.vimeo.com/video/983518774?h=79be3815c4" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <br><br><hr></hr><br>
+
+        <!-- Socials -->
+        <div>
+          <a data-track="Discord" href="https://discord.gg/tmjpJMWrEc" target="_blank">
+            <img width="50" height="50" src="https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/636e0a6ca814282eca7172c6_icon_clyde_white_RGB.svg" alt="Discord" class="image">
+          </a> 
+        </div>
+
+        <!-- <button id="pageButton" onclick="document.location='CodeRaider'">Rust Code Raider</button>
+        <button id="pageButton" onclick="document.location='Seperator'">Vivaldi Tab Stack Seperator</button> -->
+      </div>
     </div>
-  </div>
+
+    <!-- Scripts -->
+    <script src="Assets/Scripts/ScrollBar.JS"></script>
   </body>
-
-  <script>
-    const body = document.body;
-    const rootElem = document.documentElement;
-
-    function getMaxScrollY() {
-      const scrollHeight = rootElem.scrollHeight;
-      const windowHeight = window.innerHeight;
-
-      return (scrollHeight - windowHeight);
-    };
-
-    function moveScrollBar(scrollY) {
-      var scrollBar = document.getElementById('scrollBar');
-      var scrollBarStyle = scrollBar.style
-      var maxScrollY =  getMaxScrollY();
-      var canScroll = (maxScrollY > 0);
-
-      scrollBarStyle.setProperty("visibility", (canScroll ? "visible" : "hidden"));
-      if (!canScroll) {return};
-      
-      var thumbTop = document.getElementById('scrollThumbTop');
-      var thumbTopSyle = thumbTop.style
-      var thumbTopHeight = scrollThumbTop.height;
-
-      var scrollPercentage = ((scrollY / getMaxScrollY()) * 100);
-      var percentageModifier = 0;
-      if (scrollPercentage >= 50) {percentageModifier = thumbTopHeight};
-
-      thumbTopSyle.setProperty('top', `calc(${scrollPercentage}% - ${percentageModifier}px`);
-    };
-
-    moveScrollBar(body.scrollHeight);
-    window.addEventListener("scroll", (event) => {moveScrollBar(this.scrollY)});
-  </script>
 </html>
